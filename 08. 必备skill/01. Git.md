@@ -1,0 +1,170 @@
+# Git
+
+## Git
+
+1. 分布式版本控制工具
+2. Github / Gitee / Gitlab（局域网，公司内部）
+
+## Why we need Git
+
+1. 为什么需要Git
+
+   从个人开发到多人开发，多个人同时更改一个文件的时候容易发生覆盖
+
+2. 集中式版本控制 & 分布式版本控制
+
+   集中式，就是有一个服务器来保存真正的版本。缺点：单点故障
+
+   分布式，每个客户端都保存了完整内容。远程库来保证各点的一致性。
+
+## Basic Knowledge
+
+### 工作区、暂存区、本地库
+
+1. 工作区：写代码
+
+   代码存放的磁盘位置
+
+2. 暂存区：临时存储
+
+   让git追踪到文件 是可以删掉的
+
+3. 本地库：历史版本
+
+   会生成历史版本 是无法删掉的 因为每一个V2都是基于V1的
+
+4. 涉及命令
+
+   git add
+
+   git commit
+
+### 远程库
+
+1. 局域网
+
+   GitLab
+
+2. 互联网
+
+   GitHub
+
+   Gitee（China
+
+### 其他
+
+1. git是全量管理方案，适用代码、文本，svn是增量管理方案，适用大型二进制文件、视频
+2. git将修改信息都放在根目录下的.git文件夹中，SVN在每一个目录下都有一个.svn => svn想要删除文件的时候就需要删除每一个文件夹中的.svn
+3. git虽然是全量管理方案，但为了节省存储空间，使用文件的SHA-1值作为文件名进行存储，保证相同内容仅存储一份。
+4. git在存储时，使用了tree结构，每个文件夹都是一个tree，最底层文件就是一个叶子节点。tree左遍历后可以得到扁平化的文件目录。当把文件变成SHA-1值的时候，前两位作为目录名，后面存储子文件信息。
+5. 暂存区的设计，是为了帮我们观测文件状态
+
+## 常用命令
+
+### 用户设置
+
+1.  设置
+
+​	git config --global user.name [UserName]
+
+​	git config --global user.email [UserEmail] => 虚拟邮箱，不会验证，和远程用户没有任何关系
+
+2. 验证
+
+​	查看User/[user]/.gitconfig文件
+
+### 使用
+
+- git init
+
+  初始化，让git获得目录权限。会在相应目录新建一个.git文件
+
+- git status
+
+- git add 
+
+  撤销：git rm --cached [file]
+
+- git commit -m "[Version Info]" [file Name]
+
+- git reflog / git log
+
+- git diff
+
+- git stash
+
+### 版本穿梭
+
+- git reflog
+
+  查看精简版本信息
+
+- git log
+
+  查看详细版本信息
+
+- git reset --hard [Target Version]
+
+  会在各个等级目录的head文件中存储相关信息
+
+### 分支
+
+- git branch 
+
+- 创建 git branch [BranchName]
+- 查看 git branch -v [BranchName]
+- 切换 git checkout [BranchName]
+- 合并 git merge [BranchName]
+
+### 同团队协作
+
+- 设置Collaborators进行团队管理
+- git clone 远程库copy到本地，完整复制
+- git push 同团队
+- git pull
+
+### 跨团队协作
+
+- git fork 不同团队，远程库copy到远程库
+- pull request 远程库和远程库的合并，申请合并
+- pull request => merge pull request => confirm merge
+
+### 其他
+
+1. git commit每次会产生一个快照，对应了一个SHA-1值，多次git commit就会产生一个快照列表，HEAD指针指向最新的快照
+2. Git中每个版本有一个指针，还有一个HEAD指针
+
+## GitHub
+
+### 创建别名
+
+- git remote -v
+- git remote add [name] [link]
+- git push [remoteLib] [branchName]
+
+### SSH
+
+- ssh-keygen -t [加密算法] -C [email]
+
+  加密算法：如rsa
+
+  -C：描述，常用邮箱地址
+
+  运行后会生成一个公钥(.pub)和一个私钥，把公钥copy到GitHub上即可
+
+- ssh信息会被存储到一个.ssh文件夹里
+
+## GitLab
+
+- 使用MIT许可证的基于网路的Git仓库管理工具
+
+### 搭建GitLab服务器
+
+1. 准备服务器，关闭防火墙，配置主机名和IP，保证服务器可以上网
+2. 写脚本安装gitlab
+3. 初始化GitLab服务
+4. 启动GitLab服务
+5. 使用浏览器访问GitLab服务器、设置root账户信息
+
+
+
